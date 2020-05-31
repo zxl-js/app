@@ -18,7 +18,7 @@ const actions = {
         console.log("-----")
         console.log(result.data)
         if (result.code === 200) {
-
+            
             commit('RECEIVE_HOMELIST', result.data)
         }
     }

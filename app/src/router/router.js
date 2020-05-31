@@ -3,13 +3,18 @@ import ProductList from "../pages/ProductList"
 import Maniac from "../pages/Maniac"
 import ShoppingList from "../pages/ShoppingList"
 import Personal from "../pages/Personal"
+// import Special from "../pages/ProductList/Special"
 export default [{
         path: "/",
         component: Home
     },
     {
         path: "/productlist",
-        component: ProductList
+        component: ProductList,
+        // children: [{
+        //     path: "/productlist/special",
+        //     component: Special
+        // }]
     },
     {
         path: "/maniac",
