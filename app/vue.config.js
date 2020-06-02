@@ -10,5 +10,16 @@ module.exports = {
                 ]
             }
         }
+    },
+    lintOnSave: false, //关闭eslint语法检查
+    devServer: {
+        proxy: {
+            // c处理api开头地址
+            "/topic": {
+                target: "https://m.you.163.com",
+                changeOrigin: true, //是否跨域
+                ws: true
+            }
+        }
     }
 }

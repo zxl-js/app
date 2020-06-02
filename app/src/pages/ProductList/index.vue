@@ -20,7 +20,9 @@
           />
           <div class="item_list">
             <ul class="list">
+              <!-- 让左边导航栏  对应右边的下标 数据 -->
               <li v-show="active==index" v-for="(item,index) in cateLists" :key="item.id">
+                <!-- 遍历根据下标 找到前四个数据 -->
                 <div
                   v-show="index<=3"
                   v-for="list in item.categoryList"
@@ -30,13 +32,15 @@
                   <img :src="list.bannerUrl" alt />
                   <span>{{list.name}}</span>
                 </div>
+
+                <!-- 遍历根据下标 找到后面所有的数据数据 -->
                 <div
                   v-show="index>3"
                   v-for="list in item.subCateList"
                   :key="list.id"
                   class="left_list"
                 >
-                  <h2>{{list.frontName}}</h2>
+                  <!-- <h2>{{list.frontName}}</h2> -->
                   <img :src="list.wapBannerUrl" alt />
                   <span>{{list.name}}</span>
                 </div>
@@ -91,6 +95,16 @@ export default {
       cateLists: state => state.nav.cateLists
     })
   }
+  //  <div
+  //                 v-show="index>3"
+  //                 v-for="list in item.subCateList"
+  //                 :key="list.id"
+  //                 class="left_list"
+  //               >
+  //                 <!-- <h2>{{list.frontName}}</h2> -->
+  //                 <img :src="list.wapBannerUrl" alt />
+  //                 <span>{{list.name}}</span>
+  //               </div>
 };
 </script>
 

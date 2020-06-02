@@ -5,20 +5,22 @@
         <a href="/" class="logo"></a>
         <div class="headerInput">
           <i class="icon"></i>
-          <input
-            type="text"
-            placeholder="商品搜索,共27572款好物"
-            class="Input"
-          />
+          <input type="text" placeholder="商品搜索,共27572款好物" class="Input" />
         </div>
         <van-button size="mini" plain color="red">登入</van-button>
       </header>
       <nav class="Nav">
         <div v-show="isShow" class="nav_List">
-          <span class="active">推荐</span>
-          <span>居家生活</span>
+          <!-- <span class="active">推荐</span>
+          <span></span>
           <span>服饰鞋包</span>
-          <span>美食酒水</span>
+          <span>美食酒水</span>-->
+          <van-tabs v-model="active">
+            <van-tab title="推荐" class="active"></van-tab>
+            <van-tab title="居家生活"></van-tab>
+            <van-tab title="服饰鞋包"></van-tab>
+            <van-tab title="美食酒水"></van-tab>
+          </van-tabs>
         </div>
         <div class="nav_List2" v-show="!isShow">
           <div class="nav_List2_top">
@@ -78,7 +80,7 @@
       </ul>
       <!-- 商品详情 -->
       <ul class="swiper-slide">
-        <li v-for="(item, index) in homeList.kingKongModule" :key="index">
+        <li v-for="(item, index) in homeList.kingKongList" :key="index">
           <img :src="item.picUrl" alt />
           <div>{{ item.text }}</div>
         </li>
@@ -135,10 +137,7 @@
           <div class="content_left">
             <h3>新人专享礼包</h3>
             <a href="javascript:;">
-              <img
-                src="//yanxuan.nosdn.127.net/352b0ea9b2d058094956efde167ef852.png"
-                alt
-              />
+              <img src="//yanxuan.nosdn.127.net/352b0ea9b2d058094956efde167ef852.png" alt />
             </a>
           </div>
           <div class="content_ringht">
@@ -471,11 +470,12 @@
 
 <script>
 import { mapState } from "vuex";
-import { Button, Icon, Swipe, SwipeItem, Lazyload } from "vant";
+import { Button, Icon, Swipe, SwipeItem, Lazyload, Tab, Tabs } from "vant";
 export default {
   data() {
     return {
       isShow: true,
+      active: 1
       // homeList: [], //用来存储数据
     };
   },
@@ -485,17 +485,19 @@ export default {
     [Swipe.name]: Swipe,
     [SwipeItem.name]: SwipeItem,
     [Lazyload.name]: Lazyload,
+    [Tab.name]: Tab,
+    [Tabs.name]: Tabs
   },
   computed: {
     ...mapState({
-      homeList: (state) => state.home.homeDataList,
-    }),
+      homeList: state => state.home.homeDataList
+    })
   },
   mounted() {
     this.$store.dispatch("gethomeDataList");
     // console.log(this.$store);
     // this.homeList = this.homeList;
-  },
+  }
 };
 </script>
 
@@ -552,21 +554,33 @@ export default {
       }
     }
     .Nav {
-      margin-top: 10px;
+      // margin-top: 10px;
       width: 100%;
-      position: relative;
+      // position: relative;
       .nav_List {
         // display: inline;
         display: flex;
+        div {
+          width: 310px;
+
+          // div {
+          //   padding: 0;
+          // }
+          // margin-top: -10px;
+          // z-index: -1;
+        }
         .active {
           color: red;
         }
         span {
           display: inline-block;
-          width: 78px;
+          width: 16px;
           // flex: 1;
 
           text-align: center;
+          // position: absolute;
+          // right: 28px;
+          // top: 17px;
           // width: 20%;
         }
       }
@@ -576,6 +590,7 @@ export default {
         .nav_List2_top {
           width: 100%;
           display: flex;
+          margin-top: 15px;
           // justify-content: space-around;
           justify-content: space-between;
           p {
@@ -591,7 +606,7 @@ export default {
           width: 100%;
           display: flex;
           flex-wrap: wrap;
-          margin-top: 20px;
+          margin-top: 10px;
           // li {
           //   margin-left: 10px;
           //   margin-bottom: 10px;
@@ -610,13 +625,16 @@ export default {
         }
       }
       .crumbs {
+        widows: 16px;
+        height: 16px;
         position: absolute;
-        right: 30px;
-        top: 4px;
+        right: 25px;
+        top: 60px;
       }
     }
   }
   .swiper {
+    // z-index: 2;
     padding-top: 80px;
     img {
       width: 100%;

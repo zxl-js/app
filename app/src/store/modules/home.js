@@ -15,10 +15,11 @@ const actions = {
         commit
     }) {
         const result = await reqProductList()
-        console.log("-----")
-        console.log(result.data)
+        // console.log("-----")
+        // console.log(result.data.kingKongModule)
+        result.data = result.data.kingKongModule
         if (result.code === 200) {
-            
+
             commit('RECEIVE_HOMELIST', result.data)
         }
     }
